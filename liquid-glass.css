@@ -1,0 +1,225 @@
+/* ============================================================
+   Liquid Glass 覆盖层（照苹果 iOS 26/27 的液态玻璃效果）
+   原理：不动原 styles.css，只在其后覆盖视觉层，随时可撤：
+   删除 index.html 里 liquid-glass.css 的 <link> 一行即恢复原站。
+   --tint 由右下角滑块控制：0=Ultra Clear 更透明，1=Fully Tinted 更磨砂
+   ============================================================ */
+:root {
+  --tint: 0.42;
+  --lg-alpha: calc(0.30 + var(--tint) * 0.52);
+  --lg-alpha-strong: calc(0.48 + var(--tint) * 0.44);
+  --lg-blur: calc(14px + var(--tint) * 12px);
+  --lg-border: rgba(255, 255, 255, 0.65);
+  --lg-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.80),
+    inset 1px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+    0 18px 40px rgba(16, 52, 84, 0.16);
+}
+
+/* ---------- 背景层：玻璃后面要有东西可透 ---------- */
+body {
+  background: transparent;
+}
+.lg-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(158deg, #8ec9ee 0%, #a9d9e8 30%, #bfe6cf 55%, #f6ddae 80%, #f9c9a8 100%);
+}
+.lg-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(680px 420px at 10% 4%, rgba(64, 156, 255, 0.55), transparent 62%),
+    radial-gradient(760px 520px at 90% 18%, rgba(38, 190, 168, 0.45), transparent 62%),
+    radial-gradient(700px 560px at 82% 92%, rgba(255, 166, 88, 0.50), transparent 62%),
+    radial-gradient(620px 520px at 14% 96%, rgba(148, 130, 255, 0.42), transparent 62%);
+}
+.lg-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.55) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 26%, #000 25%, transparent 76%);
+          mask-image: radial-gradient(ellipse at 50% 26%, #000 25%, transparent 76%);
+}
+.lg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(4px);
+}
+.lg-orb-a { width: 330px; height: 330px; left: -90px; top: 150px; background: radial-gradient(circle at 32% 30%, #cdefff, #4db2ff 62%, transparent 72%); opacity: 0.85; }
+.lg-orb-b { width: 270px; height: 270px; right: -70px; top: 560px; background: radial-gradient(circle at 32% 30%, #ffe2b8, #ff9e57 62%, transparent 72%); opacity: 0.80; }
+.lg-orb-c { width: 230px; height: 230px; left: 5%; bottom: -80px; background: radial-gradient(circle at 32% 30%, #e3d2ff, #9a7bff 62%, transparent 72%); opacity: 0.75; }
+
+/* ---------- 玻璃材质（浅色版，保证企业站可读性） ---------- */
+.site-header,
+.service-card,
+.solution-list article,
+.case-grid article,
+.timeline li,
+address,
+.product-feature,
+.hero-product-stats span,
+.product-metrics div,
+.trust-strip div {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, var(--lg-alpha-strong)),
+    rgba(255, 255, 255, var(--lg-alpha)) 55%,
+    rgba(255, 255, 255, calc(var(--lg-alpha) + 0.08)));
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(175%) brightness(1.06);
+          backdrop-filter: blur(var(--lg-blur)) saturate(175%) brightness(1.06);
+  border: 1px solid var(--lg-border);
+  box-shadow: var(--lg-shadow);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header, .service-card, .solution-list article, .case-grid article,
+  .timeline li, address, .product-feature, .trust-strip div {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* ---------- 导航：悬浮玻璃胶囊 ---------- */
+.site-header {
+  top: 12px;
+  margin: 12px clamp(10px, 3vw, 34px) 0;
+  border-radius: 999px;
+  min-height: 64px;
+  padding: 10px 22px;
+}
+.site-nav a { border-radius: 999px; }
+.site-nav a:hover, .site-nav a:focus-visible { background: rgba(255, 255, 255, 0.55); }
+.brand-logo { background: transparent; }
+
+/* ---------- Hero：底板变透，玻璃才透得出来 ---------- */
+.hero-carousel { background: transparent; }
+.hero {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.20)),
+    repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(31, 111, 178, 0.08) 32px),
+    repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(34, 122, 89, 0.07) 32px);
+}
+.product-hero-slide {
+  background:
+    radial-gradient(circle at 78% 28%, rgba(31, 111, 178, 0.14), transparent 32%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.22)),
+    repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(31, 111, 178, 0.07) 32px);
+}
+.hero-product-visual, .product-visual { border: 1px solid var(--lg-border); border-radius: 22px; }
+.hero-demo-badge, .product-visual-badge {
+  background: rgba(13, 26, 36, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 12px 28px rgba(5, 20, 32, 0.35);
+  border-radius: 14px;
+}
+
+/* ---------- 按钮 ---------- */
+.button.primary {
+  background: linear-gradient(145deg, #2b84d6, #1f6fb2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 22px rgba(31, 111, 178, 0.35);
+  border-radius: 999px;
+}
+.button.secondary {
+  background: rgba(255, 255, 255, var(--lg-alpha));
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(170%);
+          backdrop-filter: blur(var(--lg-blur)) saturate(170%);
+  border: 1px solid var(--lg-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+}
+
+/* ---------- 信任条 ---------- */
+.trust-strip {
+  gap: 14px;
+  padding: 18px clamp(20px, 5vw, 72px) 4px;
+  background: transparent;
+  border: 0;
+}
+.trust-strip div { border-radius: 20px; padding: 22px 24px; }
+
+/* ---------- 区块底色透出背景 ---------- */
+.band, .product-section { background: transparent; }
+.section { background: transparent; }
+
+/* ---------- 卡片圆角与悬浮 ---------- */
+.service-card, .solution-list article, .case-grid article, .timeline li { border-radius: 20px; transition: transform 0.25s ease; }
+.service-card:hover, .solution-list article:hover, .case-grid article:hover, .timeline li:hover { transform: translateY(-4px); }
+.icon {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.45));
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 18px rgba(16, 52, 84, 0.14);
+  border-radius: 14px;
+}
+.product-label {
+  background: rgba(255, 255, 255, var(--lg-alpha));
+  border: 1px solid var(--lg-border);
+  -webkit-backdrop-filter: blur(var(--lg-blur));
+          backdrop-filter: blur(var(--lg-blur));
+}
+.product-feature { border-radius: 26px; }
+address { border-radius: 20px; }
+
+/* ---------- 深色区块改成深色玻璃面板 ---------- */
+.split {
+  margin: 0 clamp(10px, 3vw, 34px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(140deg, rgba(13, 34, 52, 0.72), rgba(13, 34, 52, 0.55));
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+          backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 24px 48px rgba(8, 30, 50, 0.30);
+}
+.metrics div {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+}
+.site-footer {
+  margin: 26px clamp(10px, 3vw, 34px) 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(13, 30, 46, 0.62);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+          backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- 右下角玻璃滑块（照 iOS 27） ---------- */
+.lg-tuner {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #0b2c49;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34));
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+          backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 14px 30px rgba(10, 40, 66, 0.25);
+}
+.lg-tuner input { width: 110px; accent-color: #1f6fb2; cursor: pointer; }
+@media (max-width: 960px) {
+  .site-nav {
+    background: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+            backdrop-filter: blur(20px) saturate(170%);
+    border-radius: 18px;
+  }
+  .trust-strip { padding-inline: 20px; }
+}

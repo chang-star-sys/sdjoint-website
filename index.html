@@ -8,8 +8,10 @@
     <title>山东卓恩信息技术有限公司 | 信息化与系统集成服务</title>
     <link rel="icon" href="assets/sdjointlogo.jpg">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="liquid-glass.css">
   </head>
   <body>
+    <div class="lg-bg" aria-hidden="true"><span class="lg-orb lg-orb-a"></span><span class="lg-orb lg-orb-b"></span><span class="lg-orb lg-orb-c"></span></div>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="返回首页">
         <img class="brand-logo" src="assets/sdjointlogo.jpg" alt="山东卓恩信息技术有限公司 Logo">
@@ -69,12 +71,12 @@
                 <span><b>94.91%</b>演示模型 F1</span>
               </div>
               <div class="hero-actions">
-                <a class="button primary" href="https://zhangzhen86.github.io/zhuoen-pv-inspection-demo/" target="_blank" rel="noopener noreferrer">在线体验 Demo</a>
+                <a class="button primary" href="https://chang-star-sys.github.io/zhuoen-pv-inspection-demo/" target="_blank" rel="noopener noreferrer">在线体验 Demo</a>
                 <a class="button secondary" href="#products">查看产品介绍</a>
               </div>
             </div>
 
-            <a class="hero-product-visual" href="https://zhangzhen86.github.io/zhuoen-pv-inspection-demo/#photos" target="_blank" rel="noopener noreferrer" aria-label="打开卓恩智检照片识别演示">
+            <a class="hero-product-visual" href="https://chang-star-sys.github.io/zhuoen-pv-inspection-demo/#photos" target="_blank" rel="noopener noreferrer" aria-label="打开卓恩智检照片识别演示">
               <img src="assets/zhuoen-pv-demo.jpg" alt="无人机航拍光伏组件脱敏示范照片" width="1000" height="517" decoding="async">
               <span class="hero-demo-badge"><b>AI 识别结果</b><small>人工复核 · 可追溯</small></span>
             </a>
@@ -220,13 +222,13 @@
             </div>
 
             <div class="product-actions">
-              <a class="button primary" href="https://zhangzhen86.github.io/zhuoen-pv-inspection-demo/" target="_blank" rel="noopener noreferrer">在线体验 Demo</a>
-              <a class="button secondary" href="https://github.com/zhangzhen86/zhuoen-pv-inspection-demo" target="_blank" rel="noopener noreferrer">查看公开仓库</a>
+              <a class="button primary" href="https://chang-star-sys.github.io/zhuoen-pv-inspection-demo/" target="_blank" rel="noopener noreferrer">在线体验 Demo</a>
+              <a class="button secondary" href="https://github.com/chang-star-sys/zhuoen-pv-inspection-demo" target="_blank" rel="noopener noreferrer">查看公开仓库</a>
             </div>
             <small class="product-note">公开演示照片均已裁剪压缩，并清除 EXIF、GPS、真实名称和用户信息。</small>
           </div>
 
-          <a class="product-visual" href="https://zhangzhen86.github.io/zhuoen-pv-inspection-demo/#photos" target="_blank" rel="noopener noreferrer" aria-label="打开卓恩智检照片识别演示">
+          <a class="product-visual" href="https://chang-star-sys.github.io/zhuoen-pv-inspection-demo/#photos" target="_blank" rel="noopener noreferrer" aria-label="打开卓恩智检照片识别演示">
             <img src="assets/zhuoen-pv-demo.jpg" alt="无人机航拍光伏组件脱敏示范照片" width="1000" height="517" loading="lazy" decoding="async">
             <span class="scan-line" aria-hidden="true"></span>
             <span class="recognition-box box-one" aria-hidden="true"></span>
@@ -347,5 +349,11 @@
     </footer>
 
     <script src="script.js"></script>
+    <div class="lg-tuner" title="Liquid Glass 玻璃强度：左更透明，右更磨砂">
+      <label for="lgRange">液态玻璃</label>
+      <input id="lgRange" type="range" min="0" max="100" value="42" aria-label="液态玻璃透明度">
+      <span id="lgRangeVal">42%</span>
+    </div>
+    <script src="liquid-glass.js"></script>
   </body>
 </html>
