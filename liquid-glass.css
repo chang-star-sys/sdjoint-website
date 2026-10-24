@@ -299,3 +299,22 @@ section[id], footer[id] { scroll-margin-top: 112px; }
   font-size: 46px; font-weight: 800; line-height: 1;
   color: rgba(11,94,168,.09); pointer-events: none;
 }
+
+/* ============ QA 修复第三轮（选择器对正原站真实类名） ============ */
+.solution-list article, .case-grid article, .timeline li, .trust-strip div, address {
+  background: linear-gradient(150deg, rgba(255,255,255,.82), rgba(255,255,255,.64));
+}
+.solution-list article p, .timeline li p { color: #41525d; }
+.solution-list article { transition: transform .25s ease, box-shadow .25s ease; }
+.solution-list article:hover { transform: translateY(-3px); }
+.timeline li { position: relative; z-index: 1; }
+/* 代表项目卡：去空高 + 右下角淡色序号水印（真实选择器） */
+.case-grid article { min-height: 118px; }
+.case-grid { counter-reset: casecard; }
+.case-grid article { counter-increment: casecard; position: relative; overflow: hidden; }
+.case-grid article::after {
+  content: counter(casecard, decimal-leading-zero);
+  position: absolute; right: 12px; bottom: 0;
+  font-size: 46px; font-weight: 800; line-height: 1;
+  color: rgba(11,94,168,.09); pointer-events: none;
+}
