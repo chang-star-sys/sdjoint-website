@@ -14,7 +14,7 @@
   }
   if (!range || !val) return;
   function apply() {
-    root.style.setProperty('--tint', range.value + '%');
+    root.style.setProperty('--tint', String(range.value / 100));
     val.textContent = range.value + '%';
   }
   range.addEventListener('input', apply);
