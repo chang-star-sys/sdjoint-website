@@ -338,7 +338,7 @@
         <address>
           <a href="tel:05333585560">电话：0533-3585560</a>
           <a href="mailto:zhangzhen@sdjoint.com">邮箱：zhangzhen@sdjoint.com</a>
-          <span>地址：山东省淄博市张店区政通路高科技创业园E座512</span>
+          <span>地址：山东省淄博市张店区政通路<span class="addr-nowrap">高科技创业园E座512</span></span>
         </address>
       </section>
     </main>
@@ -349,11 +349,14 @@
     </footer>
 
     <script src="script.js"></script>
-    <div class="lg-tuner" title="Liquid Glass 玻璃强度：左更透明，右更磨砂">
-      <label for="lgRange">液态玻璃</label>
-      <input id="lgRange" type="range" min="0" max="100" value="42" aria-label="液态玻璃透明度">
-      <span id="lgRangeVal">42%</span>
+    <div class="lg-tuner">
+    <div class="lg-tuner-panel" id="lgTunerPanel" hidden>
+      <span>浓淡</span>
+      <input id="lgRange" type="range" min="12" max="88" value="42" aria-label="液态玻璃浓淡">
+      <span id="lgVal">42%</span>
     </div>
-    <script src="liquid-glass.js"></script>
+    <button class="lg-tuner-toggle" id="lgTunerToggle" type="button" aria-expanded="false" aria-controls="lgTunerPanel">液态玻璃</button>
+  </div>
+  <script src="liquid-glass.js"></script>
   </body>
 </html>
