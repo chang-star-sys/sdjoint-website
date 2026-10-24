@@ -318,3 +318,15 @@ section[id], footer[id] { scroll-margin-top: 112px; }
   font-size: 46px; font-weight: 800; line-height: 1;
   color: rgba(11,94,168,.09); pointer-events: none;
 }
+
+/* ============ QA 第四轮：iPhone 窄屏顶栏公司名防换行（用户真机反馈） ============ */
+@media (max-width: 680px) {
+  .site-header { padding: 8px 14px; gap: 10px; }
+  .brand { gap: 8px; }
+  .brand-logo { width: 70px; height: 27px; }
+  .brand-text { min-width: 0; overflow: hidden; }
+  .brand strong {
+    font-size: 13.5px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+}
