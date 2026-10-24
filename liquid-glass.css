@@ -251,8 +251,6 @@ section[id], footer[id] { scroll-margin-top: 112px; }
   color: #0b3a5c; border-color: rgba(11,94,168,.38);
   background: linear-gradient(150deg, rgba(255,255,255,.88), rgba(255,255,255,.62));
 }
-.hero-dot { width: 26px; height: 8px; border-radius: 999px; background: rgba(11,94,168,.28); }
-.hero-dot.active { width: 36px; background: #0b5ea8; }
 .case-card { min-height: 118px; }
 .timeline { position: relative; }
 .timeline-card { position: relative; z-index: 1; }
@@ -276,4 +274,28 @@ section[id], footer[id] { scroll-margin-top: 112px; }
   .brand strong { font-size: 15px; }
   .lg-tuner { right: 12px; bottom: 12px; }
   section[id], footer[id] { scroll-margin-top: 96px; }
+}
+
+/* ============ QA 修复第二轮（复检后） ============ */
+/* 第一张主标题是无类名的 h1，单独回正字号 */
+.hero-copy h1 { font-size: clamp(30px, 3.6vw, 46px); line-height: 1.16; }
+/* 轮播指示点：真实结构是 button > span，改成胶囊点 */
+.hero-pagination button span {
+  width: 24px; height: 8px; border-radius: 999px;
+  background: rgba(11,94,168,.30);
+}
+.hero-pagination button.is-active span {
+  width: 34px; background: #0b5ea8;
+  box-shadow: 0 0 0 4px rgba(31,111,178,.12);
+}
+.hero-pagination button:hover span,
+.hero-pagination button:focus-visible span { background: #0b5ea8; }
+/* 代表项目卡：右下角加淡色序号水印，填掉空感（纯装饰，不加内容） */
+.cases-grid { counter-reset: casecard; }
+.case-card { counter-increment: casecard; position: relative; overflow: hidden; }
+.case-card::after {
+  content: counter(casecard, decimal-leading-zero);
+  position: absolute; right: 12px; bottom: 0;
+  font-size: 46px; font-weight: 800; line-height: 1;
+  color: rgba(11,94,168,.09); pointer-events: none;
 }
