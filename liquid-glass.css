@@ -330,3 +330,6 @@ section[id], footer[id] { scroll-margin-top: 112px; }
     overflow: hidden; text-overflow: ellipsis;
   }
 }
+
+/* ============ QA 第五轮：第一张标题真实父级是 .hero-content（.hero-copy 是导语段落） ============ */
+.hero-content h1 { font-size: clamp(30px, 3.6vw, 46px); line-height: 1.16; }
