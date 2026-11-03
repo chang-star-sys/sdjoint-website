@@ -98,7 +98,7 @@ if (heroCarousel && heroTrack && heroSlides.length === 2 && heroPagination.lengt
   const startAutoPlay = () => {
     stopAutoPlay();
     if (!reduceMotion.matches && !interactionPaused && !isTransitioning) {
-      const delay = isFirstAutoAdvance ? 80 : 3000;
+      const delay = isFirstAutoAdvance ? 6000 : 3000;
       isFirstAutoAdvance = false;
       autoTimer = window.setTimeout(() => {
         autoTimer = null;
