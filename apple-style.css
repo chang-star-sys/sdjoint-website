@@ -143,7 +143,11 @@ small, .product-note { font-size: 13px; color: var(--a-aux); }
   border-radius: 12px;
   font-weight: 600;
 }
-.service-illustration { filter: grayscale(1); opacity: 0.28; }
+/* 服务插图：照片就按照片呈现，全彩、全不透明（2026-11-03 用户反馈后修正，
+   此前 grayscale + opacity .28 让插图像蒙了层磨砂皮） */
+.service-illustration { filter: saturate(1.15) contrast(1.05); opacity: 1; }
+/* 轮播切换：原 1 秒偏拖沓，收紧到 .65 秒 */
+.hero-track { transition-duration: 0.65s; }
 .product-capabilities li::before { background: var(--a-ink); }
 .product-label {
   background: var(--a-bg);
