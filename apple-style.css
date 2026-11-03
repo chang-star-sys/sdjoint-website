@@ -1,0 +1,248 @@
+/* ============================================================
+   Apple Style 覆盖层（2026-11-03）
+   依据本旁聊沉淀的三条核心规则 + 色彩规则，在 liquid-glass.css 之后加载：
+   一、留白：区块间距拉大，内容不挤，图片前后留距离作阅读停顿
+   二、层级：字号真正拉开 —— Hero 56 / 区块标题 40 / 卡片标题 19 / 正文 16 / 说明 13
+   三、克制：只用 #1D1D1F 深灰 + #6E6E73 / #86868B 灰阶 + 一个品牌蓝，
+       正文不用纯黑，强调只靠字重，不用彩虹渐变和多色装饰
+   回滚：删除 index.html 里 apple-style.css 的 <link> 一行即回到液态玻璃版，
+        再删 liquid-glass.css 一行即回到原站。原 styles.css / script.js 一字未动。
+   ============================================================ */
+:root {
+  --a-ink: #1d1d1f;
+  --a-sub: #6e6e73;
+  --a-aux: #86868b;
+  --a-bg: #f5f5f7;
+  --a-card: #ffffff;
+  --a-line: #d2d2d7;
+  --a-accent: #0071e3;
+  --a-dark: #1d1d1f;
+  --a-dark-card: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- 全局：字体、正文色、行距 ---------- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  color: var(--a-ink);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: rgba(0, 113, 227, 0.18); }
+
+/* ---------- 背景：关掉彩虹渐变与光球，只留苹果灰底 ---------- */
+.lg-bg { background: var(--a-bg); }
+.lg-bg::before, .lg-bg::after { display: none; }
+.lg-orb { display: none; }
+
+/* ---------- 层级：字号拉开 ---------- */
+.eyebrow {
+  color: var(--a-aux);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+}
+.hero-content h1, h1 {
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  color: var(--a-ink);
+}
+.hero-title {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  color: var(--a-ink);
+}
+h2 {
+  font-size: clamp(29px, 3.4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  color: var(--a-ink);
+}
+h3 { font-size: 19px; font-weight: 600; line-height: 1.4; color: var(--a-ink); }
+.product-content h3 {
+  font-size: clamp(27px, 3.2vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.case-grid h3 { font-size: 17px; font-weight: 600; line-height: 1.5; }
+small, .product-note { font-size: 13px; color: var(--a-aux); }
+
+/* 正文与说明：深灰分两档，不用纯黑 */
+.hero-copy { color: var(--a-ink); font-size: clamp(17px, 1.6vw, 19px); line-height: 1.7; }
+.section-heading p:not(.eyebrow),
+.service-card p, .solution-list article p, .timeline li span,
+.product-content > p, .contact p { color: var(--a-sub); }
+.trust-strip span, .brand small, .metrics span { color: var(--a-aux); }
+.brand strong { color: var(--a-ink); font-weight: 600; }
+.brand small { letter-spacing: 0.02em; }
+
+/* ---------- 留白：区块与标题间距拉大 ---------- */
+.section { padding-block: clamp(84px, 10vw, 128px); }
+.section-heading { margin-bottom: 52px; max-width: 720px; }
+.section-heading.compact { margin-bottom: 40px; }
+.hero {
+  min-height: auto;
+  padding-block: clamp(76px, 9vw, 124px) clamp(88px, 10vw, 132px);
+  background: var(--a-bg);
+}
+.hero-carousel { background: var(--a-bg); }
+.product-hero-slide { background: var(--a-bg); }
+.service-grid, .solution-list { gap: 20px; }
+.case-grid, .timeline { gap: 16px; }
+.service-card { padding: 32px 30px; min-height: 0; }
+.solution-list article { padding: 30px; }
+.case-grid article { padding: 28px; }
+.timeline li { padding: 68px 22px 26px; }
+.trust-strip { padding-top: 28px; gap: 20px; }
+.trust-strip div { padding: 26px 28px; }
+
+/* 图片作停顿：与上下内容拉开距离，只用一条发丝边 + 极轻阴影 */
+.hero-product-visual, .product-visual {
+  border: 1px solid var(--a-line);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(29, 29, 31, 0.10);
+}
+.product-feature { padding: clamp(36px, 5vw, 64px); }
+.product-section { padding-block: clamp(96px, 11vw, 144px); }
+
+/* ---------- 克制：卡片全改白底发丝边，去玻璃多色与重阴影 ---------- */
+.site-header,
+.service-card, .solution-list article, .case-grid article,
+.timeline li, address, .product-feature,
+.hero-product-stats span, .product-metrics div, .trust-strip div {
+  background: var(--a-card);
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border: 1px solid var(--a-line);
+  box-shadow: 0 4px 16px rgba(29, 29, 31, 0.05);
+  border-radius: 20px;
+}
+.service-card:hover, .solution-list article:hover,
+.case-grid article:hover, .timeline li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(29, 29, 31, 0.09);
+}
+.band { background: var(--a-card); }
+.product-section { background: var(--a-bg); }
+
+/* 服务图标与插图：多色收成灰阶，只留造型不留颜色 */
+.icon {
+  background: var(--a-bg);
+  border: 1px solid var(--a-line);
+  box-shadow: none;
+  color: var(--a-ink);
+  border-radius: 12px;
+  font-weight: 600;
+}
+.service-illustration { filter: grayscale(1); opacity: 0.28; }
+.product-capabilities li::before { background: var(--a-ink); }
+.product-label {
+  background: var(--a-bg);
+  border: 1px solid var(--a-line);
+  color: var(--a-ink);
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  font-weight: 600;
+}
+.product-metrics strong { color: var(--a-ink); }
+.hero-product-stats b { color: var(--a-ink); }
+.solution-list span { color: var(--a-aux); }
+.timeline li::before { color: var(--a-aux); }
+.case-grid span { color: var(--a-aux); }
+.case-grid article::after { color: rgba(29, 29, 31, 0.06); }
+@media (min-width: 1081px) {
+  .timeline::before { background: var(--a-line); }
+}
+
+/* ---------- 导航：保留悬浮胶囊，但收成白玻璃 + 发丝边 ---------- */
+.site-header {
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+          backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(210, 210, 215, 0.85);
+  box-shadow: 0 6px 20px rgba(29, 29, 31, 0.07);
+}
+.site-nav a { color: var(--a-ink); font-size: 14px; }
+.site-nav a:hover, .site-nav a:focus-visible { background: rgba(29, 29, 31, 0.06); }
+
+/* ---------- 按钮：只留一个强调蓝，主次靠深浅 ---------- */
+.button.primary {
+  background: var(--a-accent);
+  box-shadow: none;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.button.primary:hover { background: #0077ed; }
+.button.secondary {
+  background: transparent;
+  border: 1px solid var(--a-accent);
+  color: var(--a-accent);
+  box-shadow: none;
+  border-radius: 999px;
+  font-weight: 500;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+.hero-pagination button.is-active span { background: var(--a-ink); box-shadow: none; }
+.hero-pagination button span { background: rgba(29, 29, 31, 0.28); }
+.hero-pagination button:hover span,
+.hero-pagination button:focus-visible span { background: var(--a-ink); }
+
+/* 演示徽标：深灰半透明，不用藏青重影 */
+.hero-demo-badge, .product-visual-badge {
+  background: rgba(29, 29, 31, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(29, 29, 31, 0.22);
+}
+
+/* ---------- 深色区块：#1D1D1F 主体 + 更深一层分卡片 ---------- */
+.split {
+  background: var(--a-dark);
+  border: 1px solid var(--a-dark);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border-radius: 28px;
+}
+.split h2 { color: #f5f5f7; }
+.split .eyebrow { color: var(--a-aux); }
+.split p { color: rgba(245, 245, 247, 0.78); }
+.metrics div {
+  background: var(--a-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border-radius: 16px;
+}
+.metrics strong { color: #f5f5f7; }
+.metrics span { color: rgba(245, 245, 247, 0.66); }
+.site-footer {
+  background: var(--a-dark);
+  border: 1px solid var(--a-dark);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  color: rgba(245, 245, 247, 0.72);
+}
+
+/* ---------- 液态玻璃滑块：与新风格冲突（多余的设计），隐藏 ---------- */
+.lg-tuner { display: none; }
+
+/* ---------- 移动端：留白收一档，层级不塌 ---------- */
+@media (max-width: 680px) {
+  .section { padding-block: 72px; }
+  .section-heading { margin-bottom: 36px; }
+  .hero-content h1, h1 { font-size: 34px; }
+  h2 { font-size: 28px; }
+  .service-card { padding: 26px 24px; }
+  .site-nav { background: rgba(255, 255, 255, 0.96); border: 1px solid var(--a-line); }
+}
